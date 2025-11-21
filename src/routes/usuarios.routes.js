@@ -10,6 +10,7 @@ const usuariosController = new crudUsuarios();
 const tabla = 'usuarios';
 const idCampo = 'ID_USUARIO';  
 
+
 // 1. LISTAR TODOS LOS USUARIOS 
 router.get('/', async (req, res) => {
     try {
@@ -21,7 +22,25 @@ router.get('/', async (req, res) => {
     }
 });
 
-// Ruta para obtener UNO 
+
+router.get('/codigo/:codigo', async (req, res) => {
+    try {
+        const { codigo } = req.params;
+
+        const usuario = await usuariosController.ObtenerUsuarioPorCodigo(codigo);
+
+        if (!usuario) {
+            return res.status(404).json({ mensaje: "Usuario no encontrado" });
+        }
+
+        res.json(usuario);
+
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+
 router.get('/:id', async (req, res) => {
     try {
         const usuario = await usuariosController.ObtenerUsuarioPorId(req.params.id);
@@ -38,7 +57,7 @@ router.get('/:id', async (req, res) => {
 });
 
 
-// Para crear un uusario
+// Para crear un usario
 router.post('/', async (req, res) => {
     try {
         const nuevoUsuario = await crudGenerico.crear(tabla, req.body); 

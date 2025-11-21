@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
     try {
         const roles = await crudGenerico.ObtenerTodos(tabla);
         res.json(roles);
-    } catch {
+    } catch (error) {
         res.status(500).json({ error: error.message });
     }
 })
@@ -31,7 +31,7 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        const nuevoRol = await crudGenerico.crear(tabla.req.body);
+        const nuevoRol = await crudGenerico.crear(tabla, req.body);
         res.status(201).json(nuevoRol);
     } catch (error) {
         res.status(500).json({ error: error.message });

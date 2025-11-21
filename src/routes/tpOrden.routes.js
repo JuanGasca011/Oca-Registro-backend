@@ -6,9 +6,9 @@ const CrudGenericoController = require('../controllers/crud_generico.controller'
 
 const crudGenerico = new CrudGenericoController();
 
-const tabla = 'actividad';
+const tabla = 'tpOrden';
 
-const idCampo = 'ID_ACTIVIDAD';
+const idCampo = 'ID_tpOrden';
 
 router.get('/', async (req, res) => {
     try {
@@ -30,7 +30,7 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        const nuevaActividad = await crudGenerico.crear(tabla.req.body);
+        const nuevaActividad = await crudGenerico.crear(tabla, req.body);
         res.status(201).json(nuevaActividad);
     } catch (error) {
         res.status(500).json({ error: error.message });

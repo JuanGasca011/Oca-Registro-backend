@@ -27,7 +27,6 @@ class CrudController {
         }
     }
     async actualizar(tabla, idCampo, id, data) {
-
         try {
             const [resultado] = await db.query(`UPDATE ?? SET ? WHERE ?? = ?`, [tabla, data, idCampo, id]);
             if (resultado.affectedRows === 0) {

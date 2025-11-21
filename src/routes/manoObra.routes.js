@@ -7,7 +7,7 @@ const CrudGenericoController = require('../controllers/crud_generico.controller'
 
 const crudGenerico = new CrudGenericoController();
 
-const tabla = 'mano_obra ';
+const tabla = 'mano_obra';
 
 const idCampo = 'ID_MANO_OBRA';
 
@@ -29,9 +29,11 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+
+
 router.post('/', async (req, res) => {
     try {
-        const nuevaMano_Obra = await crudGenerico.crear(tabla.req.body);
+        const nuevaMano_Obra = await crudGenerico.crear(tabla, req.body);
         res.status(201).json(nuevaMano_Obra);
     } catch (error) {
         res.status(500).json({ error: error.message });
